@@ -1,2 +1,8 @@
-package Enums;public enum ModuleType {
+package Enums;
+
+public enum ModuleType {
+    MAIN,
+    LOGIN,
+    RESERVATION,
+    EDIT
 }

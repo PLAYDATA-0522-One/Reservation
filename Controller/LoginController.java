@@ -1,12 +1,12 @@
 package Controller;
 
-import java.util.Scanner;
-
 import Enums.ModuleType;
 import Module.ModuleManager;
 
-public class MainController extends ControllerBase{
-    public MainController(Scanner sc) {
+import java.util.Scanner;
+
+public class LoginController extends ControllerBase{
+    public LoginController(Scanner sc) {
         super(sc);
     }
 

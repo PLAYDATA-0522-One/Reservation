@@ -1,2 +1,4 @@
-package View;public class EditView {
+package View;
+
+public class EditView {
 }
