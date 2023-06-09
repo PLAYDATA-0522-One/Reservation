@@ -11,25 +11,11 @@ public class EditController extends ControllerBase{
     }
 
     @Override
-    public void SelectMenu()
+    public int SelectMenu()
     {
         super.select = Integer.parseInt(sc.nextLine());
-        switch (select){
-            case 1:
-                ModuleManager.getInstance().changeModule(ModuleType.MAIN);
-                break;
-            case 2:
-                ModuleManager.getInstance().changeModule(ModuleType.LOGIN);
-                break;
-            case 3:
-                ModuleManager.getInstance().changeModule(ModuleType.RESERVATION);
-                break;
-            case 4:
-                ModuleManager.getInstance().changeModule(ModuleType.EDIT);
-                break;
-            case 0:
-                System.exit(0);
-                break;
-        }
+
+
+        return select;
     }
 }

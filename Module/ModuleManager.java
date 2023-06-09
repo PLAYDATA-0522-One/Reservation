@@ -1,5 +1,6 @@
 package Module;
 
+import Config.JdbcConnection;
 import Enums.ModuleType;
 
 import java.util.Scanner;
@@ -18,6 +19,9 @@ public class ModuleManager {
     public void initModuleManager(){
         sc = new Scanner(System.in);
         nowModule = new MainModule(sc);
+        //db test
+        //JdbcConnection conn = new JdbcConnection();
+        //conn.getJdbc();
     }
 
     public void start(){
@@ -47,5 +51,9 @@ public class ModuleManager {
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
         }
+    }
+
+    public ModuleType getNowModuleType(){
+        return nowModule.getModuleType();
     }
 }

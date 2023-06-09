@@ -11,5 +11,5 @@ public class ControllerBase {
         this.sc = sc;
     }
 
-    public void SelectMenu(){}
+    public int SelectMenu(){return 0;}
 }
