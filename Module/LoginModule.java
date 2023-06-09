@@ -23,27 +23,31 @@ public class LoginModule extends ModuleBase{
     private boolean login() {
         System.out.println("로그인");
         System.out.println("ID를 입력해주세요: ");
-        String id = sc.nextLine();
+        String username = sc.nextLine();
         System.out.println("PW를 입력해주세요: ");
-        String pw = sc.nextLine();
+        String password = sc.nextLine();
 
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        Integer idKey = null;
-        String name0 = null;
+        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        Integer id0;
+        String name0;
+        String username0;
+        String password0;
 
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, id);
-            psmt.setString(2, pw);
+            psmt.setString(1, username);
+            psmt.setString(2, password);
             ResultSet resultSet = psmt.executeQuery();
 
             if (resultSet.next()) {
-                idKey = resultSet.getInt("id");
+                id0 = resultSet.getInt("id");
+                username0 = resultSet.getString("username");
+                password0 = resultSet.getString("password");
                 name0 = resultSet.getString("name");
 
-                User user = new User(idKey, id, pw, name0);
-                System.out.println(idKey + " " + name0 + " 환영해요");
+                User user = new User(id0, username0, password0, name0);
+                System.out.println(username + " " + name0 + " 환영해요");
                 return true;
             } else {
                 System.out.println("로그인 실패, 유효하지 않은 ID 입니다.");
@@ -64,52 +68,65 @@ public class LoginModule extends ModuleBase{
     private boolean verifyCredentials(String id, String pw) {
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "select * from users" + " where username = ? and password = ?";
-        String validId = "id";
-        String validPassword = "pw";
+        String validId = "username";
+        String validPassword = "password";
 
         return id.equals(validId) && pw.equals(validPassword);
     }
 
-
-
     private void signup() {
         Connection conn = new JdbcConnection().getJdbc();
+        Integer idKey1 = null;
+        String name1 = null;
 
-        String sql = "insert into users(id, pw, username)\n" +
-                "values (?, ?, ?);\t";
+        String selectSql = "SELECT username FROM user WHERE username = ?";
+        String insertSql = "INSERT INTO user(username, password, name) VALUES (?, ?, ?)";
 
         System.out.println("회원가입");
-        System.out.println("ID를 입력해주세요: ");
-        String id = sc.nextLine();
-        System.out.println("PW를 입력해주세요: ");
-        String password = sc.nextLine();
-        System.out.println("이름을 입력해주세요: ");
+        System.out.println("Please enter ID: ");
         String username = sc.nextLine();
-        System.out.println("회원가입 성공!");
+        System.out.println("Please enter PW: ");
+        String password = sc.nextLine();
+        System.out.println("Please enter a name: ");
+        String name = sc.nextLine();
+        System.out.println("Registration successful!");
 
         try {
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, id);
-            psmt.setString(2, password);
-            psmt.setString(3, username);
-            int rowsAffected = psmt.executeUpdate();
+            PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+            selectStmt.setString(1, username);
+            ResultSet resultSet = selectStmt.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println("ERROR: User already exists!");
+                return;
+            }
+
+            // Create a new user
+            PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+            insertStmt.setString(1, username); // username == id
+            insertStmt.setString(2, password);
+            insertStmt.setString(3, name);
+            int rowsAffected = insertStmt.executeUpdate();
+
             if (rowsAffected > 0) {
-                System.out.println("등록 완료!");
+                System.out.println("Registered!");
+
             } else {
-                System.out.println("ERROR: 등록 실패.");
+                System.out.println("ERROR: Registration failed.");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-        //select user바로 다시 받아오고 new user생성
-        //생성한 user를 datamanager user 에 넣는다
-
-//        User newUser = new User(number, id, password, username);
-
-
-
     }
+
 
 
 
