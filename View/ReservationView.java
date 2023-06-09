@@ -26,4 +26,7 @@ public class ReservationView {
         System.out.println("예약이 성공적으로 완료 되었습니다.");
     }
 
+    public void printFindAirplaneError(){
+        System.out.println("비행기를 찾을 수 없습니다.");
+    }
 }
