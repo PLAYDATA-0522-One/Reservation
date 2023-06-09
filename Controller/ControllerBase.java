@@ -12,4 +12,6 @@ public class ControllerBase {
     }
 
     public int SelectMenu(){return 0;}
+
+    public String inputString(){return null;}
 }
