@@ -13,6 +13,11 @@ public class DataManager {
     //로그인 한 회원 정보
     private User user = null;
 
+    public User getUser() {
+        return user;
+    }
 
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

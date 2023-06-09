@@ -3,6 +3,7 @@ package Module;
 import Config.JdbcConnection;
 import Controller.ReservationController;
 import Data.Airpalne;
+import Data.DataManager;
 import Enums.ModuleType;
 import View.ReservationView;
 import com.mysql.cj.protocol.Resultset;
@@ -34,6 +35,9 @@ public class ReservationModule extends ModuleBase{
 
     @Override
     public void start(){
+        //test code
+
+        //
         view.printReservationMenu();
         switch (controller.SelectMenu()){
             case 1:
@@ -101,8 +105,11 @@ public class ReservationModule extends ModuleBase{
     }
 
     private void reservationAirPlane_Step2(){
+        //비행기 이름 입력
         view.printInputAirPlanName();
         String airplanName = controller.inputString();
+        //db에 티켓 insert
+
     }
 
 
