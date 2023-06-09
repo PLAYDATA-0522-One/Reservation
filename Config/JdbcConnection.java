@@ -6,8 +6,12 @@ import java.sql.SQLException;
 
 public class JdbcConnection {
     //CREATE DATABASE `test2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+<<<<<<< HEAD
     //private final String url = "jdbc:mysql:///127.0.0.1:3306" + "?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
     private final String url = "jdbc:mysql:///localhost:3306" + "?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
+=======
+    private final String url = "jdbc:mysql://localhost:3306/airplane" + "?serverTimezone=Asia/Seoul&characterEncoding=UTF-8";
+>>>>>>> verson1
     private final String root = "root";
     private final  String pw = "1q2w3e4r!!";
     public Connection getJdbc(){
