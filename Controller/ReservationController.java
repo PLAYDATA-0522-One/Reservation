@@ -16,4 +16,10 @@ public class ReservationController extends ControllerBase{
         super.select = Integer.parseInt(sc.nextLine());
         return select;
     }
+
+    @Override
+    public String inputString(){
+        String input = sc.nextLine();
+        return input;
+    }
 }

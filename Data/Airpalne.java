@@ -6,10 +6,10 @@ public class Airpalne {
     private int id;
     private String airplaneName;
     private Date departureTime;
-    private Date startDestination;
-    private Date endDestination;
+    private String startDestination;
+    private String endDestination;
 
-    public Airpalne(int id, String airplaneName, Date departureTime, Date startDestination, Date endDestination) {
+    public Airpalne(int id, String airplaneName, Date departureTime, String startDestination, String endDestination) {
         this.id = id;
         this.airplaneName = airplaneName;
         this.departureTime = departureTime;
@@ -29,11 +29,11 @@ public class Airpalne {
         return departureTime;
     }
 
-    public Date getStartDestination() {
+    public String getStartDestination() {
         return startDestination;
     }
 
-    public Date getEndDestination() {
+    public String getEndDestination() {
         return endDestination;
     }
 
