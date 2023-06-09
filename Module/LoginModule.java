@@ -86,14 +86,12 @@ public class LoginModule extends ModuleBase{
         System.out.println("이름을 입력해주세요: ");
         String username = sc.nextLine();
         System.out.println("회원가입 성공!");
-        int number =0;
-        User newUser = new User(number, id, password, username);
-        number = newUser.getUsernumber()+1;
+
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, newUser.getUserID());
-            psmt.setString(2, newUser.getPw());
-            psmt.setString(3, newUser.getUserName());
+            psmt.setString(1, id);
+            psmt.setString(2, password);
+            psmt.setString(3, username);
             int rowsAffected = psmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("등록 완료!");
@@ -103,6 +101,14 @@ public class LoginModule extends ModuleBase{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        //select user바로 다시 받아오고 new user생성
+        //생성한 user를 datamanager user 에 넣는다
+
+//        User newUser = new User(number, id, password, username);
+
+
+
     }
 
 
