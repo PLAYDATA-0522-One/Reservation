@@ -2,6 +2,8 @@ package Module;
 
 import Controller.EditController;
 import Enums.ModuleType;
+import View.EditView;
+import View.LoginView;
 
 import java.util.Scanner;
 
@@ -18,8 +20,8 @@ public class EditModule extends ModuleBase{
 
     @Override
     public void start(){
-        System.out.println("에딧 모듈 입니다");
-        System.out.println("1. 메인  2.로그인  3.예약  4.개발자모드  0.종료");
+        EditView editView = new EditView();
+        EditView.printeditView();
         switch (controller.SelectMenu()){
             case 1:
                 ModuleManager.getInstance().changeModule(ModuleType.MAIN);

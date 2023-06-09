@@ -3,13 +3,22 @@ package Data;
 public class User {
     private int usernumber;
     private String userID;
-    private String pw;
+    private String userPW;
 
-    public User(int usernumber, String userID, String pw) {
+    private String userName;
+
+
+    public User(int usernumber, String id, String pw, String name) {
         this.usernumber = usernumber;
-        this.userID = userID;
-        this.pw = pw;
+        this.userID = id;
+        this.userPW = pw;
+        this.userName = name;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
 
     public int getUsernumber() {
         return usernumber;
@@ -20,14 +29,14 @@ public class User {
     }
 
     public String getPw() {
-        return pw;
+        return userPW;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userID='" + userID + '\'' +
-                ", pw='" + pw + '\'' +
+                "userID='"+ userID + '\'' +
+                ", pw='" + userPW + '\'' +
                 '}';
     }
 }
