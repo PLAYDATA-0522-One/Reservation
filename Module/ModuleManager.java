@@ -32,19 +32,20 @@ public class ModuleManager {
         nowModule = null;
 
         switch (type){
-            case MAIN -> {
+            case MAIN:
                 nowModule = new MainModule(sc);
-            }
-            case LOGIN -> {
+                break;
+            case LOGIN:
                 nowModule = new LoginModule(sc);
-            }
-            case RESERVATION -> {
+                break;
+            case RESERVATION:
                 nowModule = new ReservationModule(sc);
-            }
-            case EDIT -> {
+                break;
+            case EDIT:
                 nowModule = new EditModule(sc);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 }

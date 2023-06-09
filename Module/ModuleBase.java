@@ -6,6 +6,10 @@ import Enums.ModuleType;
 import java.util.Scanner;
 
 public class ModuleBase {
+    public ModuleType getModuleType() {
+        return moduleType;
+    }
+
     protected ModuleType moduleType;
     protected Scanner sc;
     protected ControllerBase controller;
