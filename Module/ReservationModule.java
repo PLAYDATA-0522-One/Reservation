@@ -4,12 +4,13 @@ import Config.JdbcConnection;
 import Controller.ReservationController;
 import Data.Airpalne;
 import Data.DataManager;
-import Data.User;
+import Data.Ticket;
 import Enums.ModuleType;
 import View.ReservationView;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,6 +23,7 @@ public class ReservationModule extends ModuleBase{
     }
 
     private List<Airpalne> airplaneList = new ArrayList<>();
+    private List<Ticket> ticketList = new ArrayList<>();
 
     @Override
     protected void init(){
@@ -42,6 +44,10 @@ public class ReservationModule extends ModuleBase{
                 //todo 예약
                 //티켓 만들어서 db에 insert
                 reservationAirPlane_Step1();
+                break;
+            case 3:
+                //todo 티켓 확인
+                getMyTickets_by_Database();
                 break;
             case 0:
                 ModuleManager.getInstance().changeModule(ModuleType.MAIN);
@@ -66,7 +72,8 @@ public class ReservationModule extends ModuleBase{
                 Date departure_time = rst.getDate("departure_time");
                 String start_destination = rst.getString("start_destination");
                 String end_destination = rst.getString("end_destination");
-
+                //Date date = new Date(2023, 6, 10);
+                Date date = new Date(Calendar.getInstance().getTimeInMillis());
                 //리스트 추가
                 Airpalne p = new Airpalne(id, name, departure_time, start_destination, end_destination);
                 airplaneList.add(p);
@@ -145,8 +152,58 @@ public class ReservationModule extends ModuleBase{
             try {
                 conn.close();
             } catch (SQLException e) {
-                System.out.println("sql close faill");
+                System.out.println("sql close fail");
             }
+        }
+    }
+
+    private void getMyTickets_by_Database(){
+        //비행기 목록 clear
+        ticketList.clear();
+
+        //db에서 읽어온다
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "select * from ticket where userid = ?";
+        try {
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, DataManager.getInstance().getUser().getUserID());
+
+            ResultSet rst = pst.executeQuery(sql);
+
+            while (rst.next()) {
+                //컬럼 명으로 읽어와서 생성
+                int ticketNumber = rst.getInt("ticket_number");
+                String userid = rst.getString("userid");
+                String airplneName = rst.getString("airplane_name");
+                Date departure_time = rst.getDate("departure_time");
+                String start_destination = rst.getString("start_destination");
+                String end_destination = rst.getString("end_destination");
+
+                //리스트 추가
+                Ticket t = new Ticket(ticketNumber, userid, airplneName, departure_time,
+                        start_destination, end_destination);
+                ticketList.add(t);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("select ticket error");
+        }
+
+        //db connection 닫기
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("sql close faill");
+        }
+
+        if (ticketList.size() == 0){
+            //티켓 없음
+            view.printNoTicket();
+        }
+        else{
+            showTicketList();
         }
     }
 
@@ -165,10 +222,14 @@ public class ReservationModule extends ModuleBase{
         return null;
     }
 
+    private void showTicketList(){
+        for (int i = 0; i < ticketList.size(); i++) {
+            System.out.println(ticketList.get(i).toString());
+        }
+    }
+
 
     @Override
     public void outModule(){
-        System.out.println("예약 모듈 나감");
-
     }
 }

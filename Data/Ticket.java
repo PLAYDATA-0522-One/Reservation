@@ -7,10 +7,10 @@ public class Ticket {
     private String userID;
     private String airplaneName;
     private Date departureTime;
-    private Date startDestination;
-    private Date endDestination;
+    private String startDestination;
+    private String endDestination;
 
-    public Ticket(int ticketNumber, String userID, String airplaneName, Date departureTime, Date startDestination, Date endDestination) {
+    public Ticket(int ticketNumber, String userID, String airplaneName, Date departureTime, String startDestination, String endDestination) {
         this.ticketNumber = ticketNumber;
         this.userID = userID;
         this.airplaneName = airplaneName;
@@ -35,11 +35,11 @@ public class Ticket {
         return departureTime;
     }
 
-    public Date getStartDestination() {
+    public String getStartDestination() {
         return startDestination;
     }
 
-    public Date getEndDestination() {
+    public String getEndDestination() {
         return endDestination;
     }
 

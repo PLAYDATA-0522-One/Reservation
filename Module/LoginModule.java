@@ -2,6 +2,7 @@ package Module;
 
 import Config.JdbcConnection;
 import Controller.LoginController;
+import Data.DataManager;
 import Data.User;
 import Enums.ModuleType;
 import View.LoginView;
@@ -47,6 +48,7 @@ public class LoginModule extends ModuleBase{
                 name0 = resultSet.getString("name");
 
                 User user = new User(id0, username0, password0, name0);
+                DataManager.getInstance().setUser(user);
                 System.out.println(username + " " + name0 + " 환영해요");
                 return true;
             } else {
@@ -58,6 +60,8 @@ public class LoginModule extends ModuleBase{
         } finally {
             try {
                 conn.close();
+                //로그인 했으니 메인모듈로
+                ModuleManager.getInstance().changeModule(ModuleType.MAIN);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -157,6 +161,6 @@ public class LoginModule extends ModuleBase{
 
     @Override
     public void outModule(){
-        System.out.println("로그인 모듈 나감");
+
     }
 }

@@ -10,7 +10,7 @@ public class ReservationView {
         printOutLineAirplane();
         System.out.println("항    공    편    예    약");
         printOutLineAirplane();
-        System.out.println("1. 조회  2. 예약  0.이전 메뉴");
+        System.out.println("1. 조회  2. 예약 3. 티켓 확인  0.이전 메뉴");
     }
 
     public void printReservationAirPlan_askShowList(){
@@ -28,5 +28,9 @@ public class ReservationView {
 
     public void printFindAirplaneError(){
         System.out.println("비행기를 찾을 수 없습니다.");
+    }
+
+    public void printNoTicket() {
+        System.out.println("해당 계정으로 예약된 티멧이 없습니다.");
     }
 }

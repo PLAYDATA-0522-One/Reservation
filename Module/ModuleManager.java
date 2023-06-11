@@ -49,7 +49,7 @@ public class ModuleManager {
                 nowModule = new EditModule(sc);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + type);
+                break;
         }
     }
 

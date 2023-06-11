@@ -290,6 +290,6 @@ public class EditModule extends ModuleBase {
 
     @Override
     public void outModule() {
-        System.out.println("에딧 모듈 나감");
+
     }
 }
