@@ -167,7 +167,6 @@ public class ReservationModule extends ModuleBase{
         try {
 
             PreparedStatement pst = conn.prepareStatement(sql);
-            System.out.println(DataManager.getInstance().getUser().getUserID());
             pst.setString(1, DataManager.getInstance().getUser().getUserID());
 
             ResultSet rst = pst.executeQuery();
@@ -208,12 +207,14 @@ public class ReservationModule extends ModuleBase{
         }
     }
 
+    //비행기 리스트 출력
     private void showAirplaneList(){
         for (int i = 0; i < airplaneList.size(); i++) {
             System.out.println(airplaneList.get(i).toString());
         }
     }
 
+    //비행기 리스트에서 비행기 이름으로 찾기
     private Airpalne findAirPlane(String name){
         for (int i = 0; i < airplaneList.size(); i++) {
             if (airplaneList.get(i).getAirplaneName().equals(name))
@@ -223,6 +224,7 @@ public class ReservationModule extends ModuleBase{
         return null;
     }
 
+    //티켓 리스트 출력
     private void showTicketList(){
         for (int i = 0; i < ticketList.size(); i++) {
             System.out.println(ticketList.get(i).toString());
@@ -232,5 +234,7 @@ public class ReservationModule extends ModuleBase{
 
     @Override
     public void outModule(){
+        airplaneList.clear();
+        ticketList.clear();
     }
 }

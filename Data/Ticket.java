@@ -3,11 +3,17 @@ package Data;
 import java.util.Date;
 
 public class Ticket {
+    //티켓번호 primry key
     private int ticketNumber;
+    //예약한 user id
     private String userID;
+    //비행기 이름
     private String airplaneName;
+    //출발시간
     private Date departureTime;
+    //줄발지
     private String startDestination;
+    //도착지
     private String endDestination;
 
     public Ticket(int ticketNumber, String userID, String airplaneName, Date departureTime, String startDestination, String endDestination) {

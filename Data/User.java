@@ -1,10 +1,13 @@
 package Data;
 
 public class User {
+    //유저 고유 번호 primary key
     private int usernumber;
+    //회원 가입 시 입력한 id
     private String userID;
+    //비밀번호
     private String userPW;
-
+    //유저 이름
     private String userName;
 
 

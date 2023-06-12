@@ -17,24 +17,26 @@ public class ModuleManager {
     private ModuleBase nowModule = null;
 
     public void initModuleManager(){
+        //모듈 초기화
+        //scanner 생성하고 첫 모듈 mainmodule 로 설정
         sc = new Scanner(System.in);
         nowModule = new MainModule(sc);
-        //db test
-        //JdbcConnection conn = new JdbcConnection();
-        //conn.getJdbc();
     }
 
     public void start(){
         while (true){
+
+            //현제 모듈 start 실행
             nowModule.start();
         }
     }
 
     public void changeModule(ModuleType type){
-
+        //모듈 교체를 위해 outmodule 실행 후 모듈을 null로 초기화
         nowModule.outModule();
         nowModule = null;
 
+        //입력받은 type에 따라 모듈 세팅
         switch (type){
             case MAIN:
                 nowModule = new MainModule(sc);

@@ -3,10 +3,15 @@ package Data;
 import java.sql.Date;
 
 public class Airpalne {
+    //primry key
     private int id;
+    //비행기 이름
     private String airplaneName;
+    //출발시간
     private Date departureTime;
+    //출발지
     private String startDestination;
+    //도착지
     private String endDestination;
 
     public Airpalne(int id, String airplaneName, Date departureTime, String startDestination, String endDestination) {

@@ -27,15 +27,12 @@ public class MainModule extends ModuleBase{
 
         switch (controller.SelectMenu()){
             case 1:
-                ModuleManager.getInstance().changeModule(ModuleType.MAIN);
-                break;
-            case 2:
                 ModuleManager.getInstance().changeModule(ModuleType.LOGIN);
                 break;
-            case 3:
+            case 2:
                 ModuleManager.getInstance().changeModule(ModuleType.RESERVATION);
                 break;
-            case 4:
+            case 3:
                 ModuleManager.getInstance().changeModule(ModuleType.EDIT);
                 break;
             case 0:
