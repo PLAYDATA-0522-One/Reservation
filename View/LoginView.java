@@ -3,7 +3,7 @@ package View;
 public class LoginView {
     public static void printloginView() {
         System.out.println("로그인 모듈 입니다");
-        System.out.println("1.로그인 2.회원가입  0.메인 모듈");
+        System.out.println("1.로그인 2.회원가입 3. 비밀번호변경  0.메인 모듈");
     }
 
     public static void printenterView1() {
@@ -34,6 +34,13 @@ public class LoginView {
     }
 
     public static void printsignView4() {
+        System.out.println("이름을 입력해주세요: ");
+    }
+
+    public static void printpwView1() {
+        System.out.println("아이디를 입력해주세요: ");
+    }
+    public static void printpwView2() {
         System.out.println("이름을 입력해주세요: ");
     }
 
