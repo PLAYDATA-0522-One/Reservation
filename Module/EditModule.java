@@ -73,10 +73,10 @@ public class EditModule extends ModuleBase {
     }
 
     private void getAirPlaneList_by_Database() {
-        // 비행기 목록 clear
+        // 비행기 리스트 요소 clear
         airpalneList.clear();
 
-        //db에서 읽어온다
+        //db에서 airplane 테이블 정보 가져오기
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "select * from airplane";
         try {
@@ -90,7 +90,7 @@ public class EditModule extends ModuleBase {
                 String start_destination = rst.getString("start_destination");
                 String end_destination = rst.getString("end_destination");
 
-                // 리스트 추가
+                // 리스트에 비행기 정보 추가
                 Airpalne p = new Airpalne(id, airplane_name, departure_time, start_destination, end_destination);
                 airpalneList.add(p);
             }
@@ -108,7 +108,7 @@ public class EditModule extends ModuleBase {
     }
 
     private void insertAirplane() {
-        // db에 비행기 정보 임의로 insert
+        // 비행기 테이블에 비행기 정보 임의로 insert
         Connection conn = new JdbcConnection().getJdbc();
 
         String sql = "insert into airplane(airplane_name, departure_time, start_destination, end_destination)\n"
@@ -117,12 +117,11 @@ public class EditModule extends ModuleBase {
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            // 비행기 이름, 출발, 도착지 입력 받기
-            System.out.println("비행기 이름 입력 >> ");
+            view.printAirplaneInfo(1);
             String airplaneName = sc.nextLine();
-            System.out.println("출발지 입력 >> ");
+            view.printAirplaneInfo(2);
             String startDestination = sc.nextLine();
-            System.out.println("도착지 입력 >> ");
+            view.printAirplaneInfo(3);
             String endDestination = sc.nextLine();
 
             pst.setString(1, airplaneName);
@@ -154,8 +153,7 @@ public class EditModule extends ModuleBase {
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            // 비행기 이름 받기
-            System.out.println("비행기 이름 입력 >> ");
+            view.printAirplaneInfo(1);
             String airplaneName = sc.nextLine();
             pst.setString(1, airplaneName);
 
@@ -176,16 +174,17 @@ public class EditModule extends ModuleBase {
     }
 
     private void showAirplaneList() {
+        // 비행기 리스트 요소 출력
         for (int i = 0; i < airpalneList.size(); i++) {
             System.out.println(airpalneList.get(i).toString());
         }
     }
 
     private void getUserList_by_Database() {
-        // 유저 목록 clear
+        // 유저 리스트 요소 clear
         userList.clear();
 
-        // db에서 읽어온다
+        // db에서 user 테이블 가져오기
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "select * from user";
         try {
@@ -198,7 +197,7 @@ public class EditModule extends ModuleBase {
                 String password = rst.getString("password");
                 String name = rst.getString("name");
 
-                // 리스트 추가
+                // 리스트에 유저 정보 추가
                 User u = new User(id, username, password, name);
                 userList.add(u);
             }
@@ -225,12 +224,11 @@ public class EditModule extends ModuleBase {
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            // 아이디, 패스워드, 이름 받기
-            System.out.println("아이디 입력 >> ");
+            view.printUserInfo(1);
             String username = sc.nextLine();
-            System.out.println("패스워드 입력 >> ");
+            view.printUserInfo(2);
             String password = sc.nextLine();
-            System.out.println("이름 입력 >> ");
+            view.printUserInfo(3);
             String name = sc.nextLine();
 
             pst.setString(1, username);
@@ -261,8 +259,7 @@ public class EditModule extends ModuleBase {
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
 
-            // 유저 아이디 입력
-            System.out.println("유저 아이디 입력 >> ");
+            view.printUserInfo(1);
             String username = sc.nextLine();
             pst.setString(1, username);
 
@@ -283,6 +280,7 @@ public class EditModule extends ModuleBase {
     }
 
     private void showUserList() {
+        // 유저 리스트 요소 출력
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i).toString());
         }
