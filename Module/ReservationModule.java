@@ -64,7 +64,7 @@ public class ReservationModule extends ModuleBase{
         String sql = "select * from airplane";
         try {
             PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rst = pst.executeQuery(sql);
+            ResultSet rst = pst.executeQuery();
             while (rst.next()) {
                 //컬럼 명으로 읽어와서 생성
                 int id = rst.getInt("id");
