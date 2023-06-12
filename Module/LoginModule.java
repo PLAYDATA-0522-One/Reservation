@@ -160,7 +160,7 @@ public class LoginModule extends ModuleBase{
         return hasSpecialCharacter && hasUppercaseLetter; // 최종적으로  hasSpecialCharacter && hasUppercaseLetter가 참인지 거짓인지를 반환함
     }
 
-    private void findPW() {
+    private void findPW() { //signup 메소드로 id와 이름을 입력받음
         Connection conn = new JdbcConnection().getJdbc();
 
         LoginView loginView = new LoginView();
@@ -172,13 +172,13 @@ public class LoginModule extends ModuleBase{
 
 
         try {
-            // id에 기반한 패스워드를 db에 업데이트하고 udpateSql이라 선언
+            // Sqlx에 db에서 입력 받아온 password를 저장
             String Sqlx = "SELECT password FROM user WHERE username = ? and name=?";
             PreparedStatement beforePsmt = conn.prepareStatement(Sqlx);
             beforePsmt.setString(1, username);
             beforePsmt.setString(2, name);
             ResultSet resultSet = beforePsmt.executeQuery();
-            String password;
+            String password; // password 초기값 지정
 
             if (!resultSet.next()) { ////resultSet의 다음으로 오는 값 즉, 초기값이 쿼리에 있는 username이 db에 있다면 if문 실행하고 if문 종료
                 System.out.println("ERROR: 회원 정보가 없습니다.");
@@ -192,7 +192,7 @@ public class LoginModule extends ModuleBase{
             newPassword = sc.nextLine();
 
 
-            if (newPassword.equals(password)){
+            if (newPassword.equals(password)){ // 비밀번호가 중복될시 메소드 종료
                 System.out.println("비밀번호가 중복됩니다.");
                 return;
             }
