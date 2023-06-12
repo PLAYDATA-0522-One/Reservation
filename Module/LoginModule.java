@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LoginModule extends ModuleBase{
-    private Scanner sc;
+    private final Scanner sc;
 
     public LoginModule(Scanner sc) {
         super(sc);
@@ -25,8 +25,18 @@ public class LoginModule extends ModuleBase{
         System.out.println("로그인");
         System.out.println("ID를 입력해주세요: ");
         String username = sc.nextLine();
+        if (username.trim().isEmpty() ) {
+            System.out.println("로그인 실패, 잘못된 입력입니다.");
+            return false;
+        }
         System.out.println("PW를 입력해주세요: ");
         String password = sc.nextLine();
+
+        if (password.trim().isEmpty()) {
+            System.out.println("로그인 실패, 잘못된 입력입니다.");
+            return false;
+        }
+
 
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
@@ -92,8 +102,13 @@ public class LoginModule extends ModuleBase{
         System.out.println("Please enter PW: ");
         String password = sc.nextLine();
         System.out.println("Please enter a name: ");
-        String name = sc.nextLine();
-        System.out.println("Registration successful!");
+        String name = sc.nextLine();;
+
+        if (!isPasswordValid(password)) {
+            System.out.println("ERROR: Password must contain at least one special character and one uppercase letter.");
+            return;
+        }else{System.out.println("Available Password!");
+        }
 
         try {
             PreparedStatement selectStmt = conn.prepareStatement(selectSql);
@@ -113,10 +128,11 @@ public class LoginModule extends ModuleBase{
             int rowsAffected = insertStmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Registered!");
+                System.out.println("Registration Successful!");
 
             } else {
-                System.out.println("ERROR: Registration failed.");
+                System.out.println("ERROR: Registration Failed!");
+                return;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -131,7 +147,29 @@ public class LoginModule extends ModuleBase{
         }
     }
 
+    private boolean isPasswordValid(String password) {
+        // Password must contain at least one special character and one uppercase letter
+        String specialCharacters = "!@#$%^&*()-_=+[{]};:'\",<.>/?";
+        String uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+        boolean hasSpecialCharacter = false;
+        boolean hasUppercaseLetter = false;
+
+        for (char c : password.toCharArray()) {
+            if (specialCharacters.contains(String.valueOf(c))) {
+                hasSpecialCharacter = true;
+            } else if (uppercaseLetters.contains(String.valueOf(c))) {
+                hasUppercaseLetter = true;
+            }
+
+            // Break the loop if both requirements are met
+            if (hasSpecialCharacter && hasUppercaseLetter) {
+                break;
+            }
+        }
+
+        return hasSpecialCharacter && hasUppercaseLetter;
+    }
 
 
 
@@ -143,7 +181,7 @@ public class LoginModule extends ModuleBase{
     @Override
     public void start(){
         LoginView loginView = new LoginView();
-        loginView.printloginView();
+        LoginView.printloginView();
         switch (controller.SelectMenu()){
             case 1:
                 //todo login

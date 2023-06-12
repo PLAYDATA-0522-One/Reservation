@@ -167,9 +167,10 @@ public class ReservationModule extends ModuleBase{
         try {
 
             PreparedStatement pst = conn.prepareStatement(sql);
+            System.out.println(DataManager.getInstance().getUser().getUserID());
             pst.setString(1, DataManager.getInstance().getUser().getUserID());
 
-            ResultSet rst = pst.executeQuery(sql);
+            ResultSet rst = pst.executeQuery();
 
             while (rst.next()) {
                 //컬럼 명으로 읽어와서 생성
