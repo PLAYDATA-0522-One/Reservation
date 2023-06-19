@@ -16,13 +16,16 @@ public class Ticket {
     //도착지
     private String endDestination;
 
-    public Ticket(int ticketNumber, String userID, String airplaneName, Date departureTime, String startDestination, String endDestination) {
+    private String seat;
+
+    public Ticket(int ticketNumber, String userID, String airplaneName, Date departureTime, String startDestination, String endDestination, String seat) {
         this.ticketNumber = ticketNumber;
         this.userID = userID;
         this.airplaneName = airplaneName;
         this.departureTime = departureTime;
         this.startDestination = startDestination;
         this.endDestination = endDestination;
+        this.seat = seat;
     }
 
     public int getTicketNumber() {
@@ -49,6 +52,10 @@ public class Ticket {
         return endDestination;
     }
 
+    public String getSeat() {
+        return seat;
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -56,8 +63,9 @@ public class Ticket {
                 ", userID='" + userID + '\'' +
                 ", airplaneName='" + airplaneName + '\'' +
                 ", departureTime=" + departureTime +
-                ", startDestination=" + startDestination +
-                ", endDestination=" + endDestination +
+                ", startDestination='" + startDestination + '\'' +
+                ", endDestination='" + endDestination + '\'' +
+                ", seat='" + seat + '\'' +
                 '}';
     }
 }
