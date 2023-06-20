@@ -62,12 +62,12 @@ public class LoginModule extends ModuleBase{
                 name0 = resultSet.getString("name");
 
                 User user = new User(id0, username0, password0, name0);
-<<<<<<< HEAD
+
                 DataManager.getInstance().setUser(user);
                 System.out.println(username + " " + name0 + " 환영해요");
-=======
+
                 System.out.println(username + " " + name0+"님 환영합니다.");
->>>>>>> verson1
+
                 return true;
             } else {
                 System.out.println("로그인 실패, 유효하지 않은 ID 입니다.");

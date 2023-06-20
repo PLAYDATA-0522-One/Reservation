@@ -2,7 +2,7 @@ package Module;
 
 import Config.JdbcConnection;
 import Controller.EditController;
-import Data.Airpalne;
+import Data.Airplane;
 import Data.User;
 import Enums.ModuleType;
 import View.EditView;
@@ -22,7 +22,7 @@ public class EditModule extends ModuleBase {
         controller = new EditController(sc);
     }
 
-    private List<Airpalne> airpalneList = new ArrayList<>();
+    private List<Airplane> airplaneList = new ArrayList<>();
     private List<User> userList = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
@@ -74,7 +74,7 @@ public class EditModule extends ModuleBase {
 
     private void getAirPlaneList_by_Database() {
         // 비행기 리스트 요소 clear
-        airpalneList.clear();
+        airplaneList.clear();
 
         //db에서 airplane 테이블 정보 가져오기
         Connection conn = new JdbcConnection().getJdbc();
@@ -91,8 +91,8 @@ public class EditModule extends ModuleBase {
                 String end_destination = rst.getString("end_destination");
 
                 // 리스트에 비행기 정보 추가
-                Airpalne p = new Airpalne(id, airplane_name, departure_time, start_destination, end_destination);
-                airpalneList.add(p);
+                Airplane p = new Airplane(id, airplane_name, departure_time, start_destination, end_destination, 5, 4);
+                airplaneList.add(p);
             }
         } catch (SQLException e) {
             System.out.println("show air plane error");
@@ -175,8 +175,8 @@ public class EditModule extends ModuleBase {
 
     private void showAirplaneList() {
         // 비행기 리스트 요소 출력
-        for (int i = 0; i < airpalneList.size(); i++) {
-            System.out.println(airpalneList.get(i).toString());
+        for (int i = 0; i < airplaneList.size(); i++) {
+            System.out.println(airplaneList.get(i).toString());
         }
     }
 
