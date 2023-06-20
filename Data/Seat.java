@@ -1,7 +1,7 @@
 package Data;
 
 public class Seat {
-    // 좌석 이름
+    // 좌석 이름 ,
     private String seatName;
 
     public Seat(String seatName) {
